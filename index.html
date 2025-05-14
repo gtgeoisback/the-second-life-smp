@@ -8,32 +8,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
             color: #1f2937;
         }
-        
+
         .gradient-text {
             background: linear-gradient(90deg, #4ade80 0%, #3b82f6 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
+
         .card-hover {
             transition: all 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-5px);
         }
-        
+
         .nav-link {
             position: relative;
         }
-        
+
         .nav-link:after {
             content: '';
             position: absolute;
@@ -44,11 +44,11 @@
             background-color: #4ade80;
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover:after {
             width: 100%;
         }
-        
+
         #youtube-player {
             position: fixed;
             top: -1000px;
@@ -60,10 +60,8 @@
     </style>
 </head>
 <body>
-    <!-- Audio element for sound effects -->
     <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
-    
-    <!-- Hidden YouTube player -->
+
     <div id="youtube-player"></div>
 
     <!-- Navigation -->
@@ -175,13 +173,14 @@
 
     <!-- YouTube IFrame API -->
     <script>
-        // Load YouTube API
+        var player;
+        var playerReady = false;
+
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '1',
@@ -197,28 +196,29 @@
                     'showinfo': 0
                 },
                 events: {
-                    'onReady': onPlayerReady
+                    'onReady': function(event) {
+                        playerReady = true;
+                    }
                 }
             });
         }
 
-        function onPlayerReady(event) {
-            // Player is ready
-            document.getElementById('learnMoreBtn').addEventListener('click', function() {
-                event.target.playVideo();
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('learnMoreBtn').addEventListener('click', function () {
                 playClickSound();
+                if (playerReady) {
+                    player.playVideo();
+                } else {
+                    alert("Player not ready yet. Try again in a second.");
+                }
             });
-        }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Easter egg console message
             console.log("%cLooking for server info? Nice try! 😉", "color: #4ade80; font-size: 16px; font-weight: bold;");
         });
 
-        // Function to play click sound
         function playClickSound() {
             const clickSound = document.getElementById('clickSound');
-            clickSound.currentTime = 0; // Rewind to start
+            clickSound.currentTime = 0;
             clickSound.play();
         }
     </script>
