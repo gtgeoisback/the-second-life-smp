@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Life SMP | Modern Minecraft Server</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #4ade80 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #4ade80;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio element for sound effects -->
+    <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
+
+    <!-- Navigation -->
+    <nav class="container mx-auto px-6 py-6">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cube text-2xl text-emerald-400"></i>
+                <span class="text-xl font-semibold">Second Life SMP</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link" onclick="playClickSound()">Home</a>
+                <a href="#" class="nav-link" onclick="playClickSound()">Features</a>
+                <a href="#" class="nav-link" onclick="playClickSound()">Join</a>
+            </div>
+            <button class="md:hidden text-gray-600" onclick="playClickSound()">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 py-16 md:py-24">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="gradient-text">Second Life SMP</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+                A minimalist Minecraft survival experience with a curated community.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-300" onclick="playClickSound()">
+                    Join Whitelist
+                </button>
+                <button class="border border-gray-300 hover:bg-gray-50 px-8 py-3 rounded-lg font-medium transition-colors duration-300" onclick="playClickSound()">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-2xl font-bold text-center mb-12">Server Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="border border-gray-100 rounded-xl p-6 card-hover shadow-sm" onclick="playClickSound()">
+                    <div class="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-map text-emerald-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Custom World</h3>
+                    <p class="text-gray-600">Hand-crafted terrain with unique biomes for fresh exploration.</p>
+                </div>
+                <div class="border border-gray-100 rounded-xl p-6 card-hover shadow-sm" onclick="playClickSound()">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Community</h3>
+                    <p class="text-gray-600">Whitelisted players focused on collaboration and creativity.</p>
+                </div>
+                <div class="border border-gray-100 rounded-xl p-6 card-hover shadow-sm" onclick="playClickSound()">
+                    <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Vanilla+</h3>
+                    <p class="text-gray-600">Subtle quality-of-life improvements without changing core gameplay.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-2 gap-8 text-center max-w-md mx-auto">
+                <div>
+                    <div class="text-3xl font-bold text-emerald-400 mb-2">24/7</div>
+                    <div class="text-gray-600">Uptime</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-blue-400 mb-2">1.20</div>
+                    <div class="text-gray-600">Version</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-6 md:mb-0">
+                    <i class="fas fa-cube text-2xl text-emerald-400"></i>
+                    <span class="text-xl font-semibold">Second Life SMP</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors" onclick="playClickSound()">
+                        <i class="fab fa-discord text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors" onclick="playClickSound()">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 text-center md:text-left">
+                <p class="text-gray-400 text-sm">&copy; 2023 Second Life SMP. Not affiliated with Mojang or Microsoft.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Easter egg console message
+            console.log("%cLooking for server info? Nice try! 😉", "color: #4ade80; font-size: 16px; font-weight: bold;");
+        });
+
+        // Function to play click sound
+        function playClickSound() {
+            const clickSound = document.getElementById('clickSound');
+            clickSound.currentTime = 0; // Rewind to start
+            clickSound.play();
+        }
+    </script>
+</body>
+</html>
