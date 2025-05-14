@@ -48,11 +48,23 @@
         .nav-link:hover:after {
             width: 100%;
         }
+        
+        #youtube-player {
+            position: fixed;
+            top: -1000px;
+            left: -1000px;
+            width: 1px;
+            height: 1px;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
     <!-- Audio element for sound effects -->
     <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
+    
+    <!-- Hidden YouTube player -->
+    <div id="youtube-player"></div>
 
     <!-- Navigation -->
     <nav class="container mx-auto px-6 py-6">
@@ -85,7 +97,7 @@
                 <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-300" onclick="playClickSound()">
                     Join Whitelist
                 </button>
-                <button class="border border-gray-300 hover:bg-gray-50 px-8 py-3 rounded-lg font-medium transition-colors duration-300" onclick="playClickSound()">
+                <button id="learnMoreBtn" class="border border-gray-300 hover:bg-gray-50 px-8 py-3 rounded-lg font-medium transition-colors duration-300">
                     Learn More
                 </button>
             </div>
@@ -161,7 +173,43 @@
         </div>
     </footer>
 
+    <!-- YouTube IFrame API -->
     <script>
+        // Load YouTube API
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '1',
+                width: '1',
+                videoId: 'dQw4w9WgXcQ',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'showinfo': 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player is ready
+            document.getElementById('learnMoreBtn').addEventListener('click', function() {
+                event.target.playVideo();
+                playClickSound();
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Easter egg console message
             console.log("%cLooking for server info? Nice try! 😉", "color: #4ade80; font-size: 16px; font-weight: bold;");
